@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://page.tuclink.com/sitemap.xml

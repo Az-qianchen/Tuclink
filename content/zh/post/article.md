@@ -1,12 +1,12 @@
 ---
 tags: ["article"] # 标签
 author: "qianchen"  # 作者
-title: "Hello Word"  # 标题
+title: "Hello World"  # 标题
 date: "1000-01-01"  # 日期
 weight: 1 # 权重用于排序
 searchHidden: true # 是否能被搜索
 layout: "baseof" # 布局模板
-draft: flase # 是否隐藏
+draft: true # 是否隐藏
 description: "这是一个测试帖" # 介绍
 
 # summary: "这是一个测试界面" # 页面描述、面向社交媒体用户
@@ -20,5 +20,5 @@ cover:
     # hidden: false # 是否隐藏
 ---
 ```
-print("Hello Word")
+print("Hello World")
 ```

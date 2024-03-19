@@ -1,4 +1,4 @@
-baseURL: https://page.tuclink.com/ # 基础链接（测试无效）
+baseURL: https://post.tuclink.com # 基础链接（测试无效）
 defaultContentLanguage: zh # 默认语言
 defaultContentLanguageInSubdir: true # 多语言文件夹
 translationKey: about
@@ -62,7 +62,7 @@ languages: # 翻译
 title: 突触递质 # 网站名称
 # paginate: 5
 theme: PaperMod # 主题
-
+unsafe: true
 # 网站生成配置
 enableRobotsTXT: true
 buildDrafts: false
@@ -84,8 +84,8 @@ params:
   description: "飘渺的想法，和未尽的梦"
   keywords: [Blog, Portfolio, PaperMod]
   author: QianChen # 默认作者
-  images: ["https://s2.loli.net/2024/03/07/X6w49UasreE3cvH.jpg"] # 头图
-  DateFormat: "January 2, 2006" # 日期格式
+  # images: ["https://s2.loli.net/2024/03/07/X6w49UasreE3cvH.jpg"] # 头图
+  DateFormat: "2006-1-2" # 日期格式
 
   defaultTheme: auto # 主题色
   disableThemeToggle: false # 禁用主题切换
@@ -149,6 +149,10 @@ params:
       url: "https://twitter.com/Tuclink_Az"
     - name: bilibili
       url: "https://b23.tv/Dy49jbs"
+    - name: reddit
+      url: "https://www.reddit.com/user/Tuclink/"
+    - name: youtube
+      url: "https://www.youtube.com/@Tuclink"
     - name: email
       url: "mailto:feedback@tuclink.com"
 
@@ -162,12 +166,12 @@ params:
       SiteVerificationTag: "XYZabc"
 
 # 封面设置
-  cover:
+  # cover:
     # hidden: true # 彻底隐藏
     # hiddenInList: true # 主页隐藏
     # hiddenInSingle: true # 页面隐藏
     # responsiveImages: true # 封面图片，使用快速响应图片
-    linkFullImages: true # 是否使用原始图片
+    # linkFullImages: true # 图片是否能跳转
 
 # 帖子默认更改路径
   # editPost:

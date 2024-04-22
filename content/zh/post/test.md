@@ -11,7 +11,8 @@ description: "功能测试" # 介绍
 
 ---
 ### 模型添加测试
- {{< three  src="https://github.com/Az-qianchen/announcement/raw/main/godot_doll.glb" ratio=2 grid=false >}}
+<!-- {{< three  src="https://github.com/Az-qianchen/announcement/raw/main/godot_doll.glb" ratio=2 grid=false >}} -->
+{{< three  src="/model/qube.glb"  high=0  ratio=2 grid=false >}}
 ### RAW 文件测试
 [RAW 文件](/txt/test.txt)
 ### Shader 测试

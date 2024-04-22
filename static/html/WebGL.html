@@ -57,6 +57,8 @@
     const fragmentShaderSource = `
       precision highp float;
 
+      uniform float theme;
+
       uniform vec3 colour1;
       uniform vec3 colour2;
       uniform vec3 colour3;
@@ -113,7 +115,7 @@
         vec3 ret_col = mix(colour1, colour2, paint_res);
         ret_col = mix(ret_col, colour3, c3p);
         ret_col = mix(ret_col, colour4, c4p);
-        gl_FragColor = vec4(ret_col * (uv_len / 2.0), 1.0);
+        gl_FragColor = vec4(ret_col * mix(uv_len / 2.0, 1.0, theme), 1.0);
         // gl_FragColor = vec4(uv.y); // 纯红色
       }
     `;
@@ -163,6 +165,7 @@
 
     // 设置变量
     const uniformLocations = {
+      theme: gl.getUniformLocation(program, 'theme'),
       colour1: gl.getUniformLocation(program, 'colour1'),
       colour2: gl.getUniformLocation(program, 'colour2'),
       colour3: gl.getUniformLocation(program, 'colour3'),
@@ -183,6 +186,7 @@
     };
 
     // 设置uniform变量的值
+    gl.uniform1f(uniformLocations.theme, 0);
     gl.uniform3f(uniformLocations.colour1, 0.0, 0.427, 0.62);
     gl.uniform3f(uniformLocations.colour2, 0.0, 0.63, 0.43);
     gl.uniform3f(uniformLocations.colour3, 1.0, 1.0, 1.0);
@@ -216,6 +220,26 @@
     );
     gl.enableVertexAttribArray(positionAttribLocation);
 
+    // console.log('进入黑暗模式'); 用于打印
+    // 同步更新页面主题
+    window.addEventListener('storage', (event) => {
+    if (localStorage.getItem('pref-theme') === 'dark') {
+      gl.uniform1f(uniformLocations.theme, 0.0);
+      gl.uniform3f(uniformLocations.colour1, 0.0, 0.427, 0.62);
+      gl.uniform3f(uniformLocations.colour2, 0.0, 0.63, 0.43);
+      gl.uniform3f(uniformLocations.colour3, 1.0, 1.0, 1.0);
+      gl.uniform3f(uniformLocations.colour4, 0.0, 0.0, 0.0);
+    } else {
+      gl.uniform1f(uniformLocations.theme, 1.0);
+      gl.uniform3f(uniformLocations.colour1, 0.0, 0.42, 0.61);
+      gl.uniform3f(uniformLocations.colour2, 0.0, 0.61, 0.57);
+      gl.uniform3f(uniformLocations.colour3, 1.0, 1.0, 1.0);
+      gl.uniform3f(uniformLocations.colour4, 1.0, 1.0, 1.0);
+    }
+    });
+    // 初始化
+    window.dispatchEvent(new Event('storage'));
+  
     // 清除画布并绘制三角形
     function render() {
       // 实时更新的值
@@ -229,6 +253,10 @@
       requestAnimationFrame(render);
     }
     render();
+    // 插值
+    function lerp(a, b, t) {
+    return a + (b - a) * t;
+    }
   </script>
 </body>
 </html>

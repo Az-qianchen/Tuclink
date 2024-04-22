@@ -70,7 +70,7 @@ buildFuture: false
 buildExpired: false
 
 # 启用谷歌网站分析
-googleAnalytics: UA-123-45
+# googleAnalytics: UA-123-45
 
 # 启用压缩
 minify:

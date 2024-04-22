@@ -4,7 +4,7 @@ author: "仟尘" # 作者
 title: "Godot：SB 开发快照（游戏 UI 演示）" # 标题
 date: "2024-03-27" # 日期
 weight: 1 # 权重用于排序
-searchHidden: true # 是否能被搜索
+searchHidden: false # 是否不被搜索
 layout: "baseof" # 布局模板
 draft: flase # 是否隐藏
 
@@ -19,7 +19,7 @@ Keywords: "Godot,UI" # 网站关键词（SEO）
 Super Ball 功能开发切片
 
 本视频主要演示了游戏内的 UI 交互，欢迎进行任何形式的反馈
-{{< bilibili 1052420429 >}}
+{{< bilibili BV11H4y1H7BG >}}
 
 整体的思路是希望能让 UI 内容的切换选择可以尽可能的快捷，聚合
 

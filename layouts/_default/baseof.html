@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
+
+<head>
+    <!-- PWA 实现代码 -->
+    <link rel="manifest" href="/effects/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="My PWA" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <script>
+        if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/effects/sw.js', { scope: '/effects/' });
+        }
+    </script>
+    <!-- PWA 实现代码 -->
+    {{- partial "head.html" . }}
+</head>
+
+<body class="
+    {{- if (or (ne .Kind `page`) (eq .Layout `archives`) (eq .Layout `search`)) -}}
+        {{- print "list" -}}
+    {{- end -}}
+    {{- if eq site.Params.defaultTheme `dark` -}}
+        {{- print " dark" -}}
+    {{- end -}}
+    " id="top">
+    {{- partialCached "header.html" . .Page -}}
+    <main class="main">
+        {{- block "main" . }}{{ end }}
+    </main>
+    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") }}
+
+</body>
+
+</html>

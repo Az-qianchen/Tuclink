@@ -4,7 +4,7 @@ author: "qianchen"  # 作者
 title: "Hello World"  # 标题
 date: "1000-01-01"  # 日期
 weight: 1 # 权重用于排序
-searchHidden: true # 是否能被搜索
+searchHidden: false # 是否不被搜索
 layout: "baseof" # 布局模板
 draft: true # 是否隐藏
 description: "这是一个测试帖" # 介绍

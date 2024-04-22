@@ -4,7 +4,7 @@ author: "仟尘"  # 作者
 title: "热闹的孤寂-拥挤的城市与原子的个体"  # 标题
 date: "2024-01-01"  # 日期
 weight: 1 # 权重用于排序
-searchHidden: true # 是否能被搜索
+searchHidden: false # 是否不被搜索
 draft: true # 是否隐藏
 ---
 ### 章节导读

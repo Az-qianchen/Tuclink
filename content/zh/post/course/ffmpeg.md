@@ -4,7 +4,7 @@ author: "仟尘"  # 作者
 title: "FFmpeg 音频转换脚本"  # 标题
 date: "2024-03-19"  # 日期
 weight: 1 # 权重用于排序
-searchHidden: true # 是否能被搜索
+searchHidden: false # 是否不被搜索
 layout: "baseof" # 布局模板
 draft: flase # 是否隐藏
 

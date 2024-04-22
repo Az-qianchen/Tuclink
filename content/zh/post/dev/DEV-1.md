@@ -4,7 +4,7 @@ author: "仟尘" # 作者
 title: "Godot：SB 开发快照（游戏声音演示）" # 标题
 date: "2024-03-18" # 日期
 weight: 1 # 权重用于排序
-searchHidden: true # 是否能被搜索
+searchHidden: false # 是否不被搜索
 layout: "baseof" # 布局模板
 draft: flase # 是否隐藏
 
@@ -17,7 +17,7 @@ Keywords: "Godot,Audio,音频" # 网站关键词（SEO）
 Super Ball 功能开发切片
 
 主要演示了游戏内的交互音效，欢迎进行任何形式的反馈
-{{< bilibili 1001777342 >}}
+{{< bilibili BV1Bx4y1S7Z7 >}}
 
 音频开发使用了 [Resonate](https://github.com/hugemenace/resonate) 插件
 

@@ -1,0 +1,128 @@
+{{ $modelPath := .Get "src" }} <!-- 模型路径 -->
+{{ $aspectRatio := .Get "ratio" | default 1.7778 }} <!-- 长宽比 -->
+{{ $withGrid := .Get "grid" | default false }} <!-- 是否显示网格 -->
+
+<!-- 为容器设置圆角 -->
+<style>
+    #container_model3d {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+</style>
+
+<!-- 渲染容器 -->
+<div id="container_model3d">
+</div>
+
+<!-- 加载地址 -->
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+        }
+    }
+</script>
+
+<!-- 加载模块 -->
+<script type="module">
+    // 导入Three.js核心库
+    import * as THREE from 'three';
+    // 房间环境
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+    // 轨道控制器
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    // GLTF模型加载器
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    // 用于加载压缩纹理和模型的加载器
+    import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
+    import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader'
+    // 用于创建区域光源和辅助对象的模块
+    import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
+    import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
+    // 声明全局变量,用于存储相机、场景、渲染器和容器元素
+    let camera, scene, renderer, containerParent;
+    // 调用初始化和渲染函数
+    init();
+    render();
+
+    function init() {
+        // 获取容器元素,并在容器加载完成时调用onWindowResize函数
+        const container = document.getElementById('container_model3d');
+        container.onload = () => {
+            onWindowResize();
+        }
+
+        // 获取画布比例
+        const aspectRatio = {{ $aspectRatio }}
+        // 获取模型路径
+        const model_path = {{ $modelPath }};
+        // 创建WebGL渲染器,设置抗锯齿、像素比、画布大小、色调映射等选项,并将渲染器的DOM元素添加到容器中
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(container.clientWidth, container.clientWidth / aspectRatio);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1;
+        container.appendChild(renderer.domElement);
+        // 创建透视相机
+        camera = new THREE.PerspectiveCamera(45, aspectRatio, 2, 100); // 设置视场角、宽高比、近远平面
+        camera.position.set(4, 4, 4); // 设置相机初始位置
+        
+        // 创建场景,设置背景颜色和环境贴图
+        const environment = new RoomEnvironment(renderer);
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x2E2E33); // 背景色更改
+        scene.environment = pmremGenerator.fromScene(environment).texture;
+        environment.dispose();
+
+        // 底面网格
+        const withGrid = {{ $withGrid }};
+        if (withGrid) {
+            const grid = new THREE.GridHelper(10, 10, 0xffffff, 0xffffff);
+            grid.material.opacity = 0.4;
+            grid.material.depthWrite = false;
+            grid.material.transparent = true;
+            scene.add(grid);
+        }
+        // 创建KTX2加载器和GLTF加载器,设置相关选项,加载3D模型并将其添加到场景中
+        const ktx2Loader = new KTX2Loader()
+            .setTranscoderPath('https://unpkg.com/three@0.161.0/examples/jsm/libs/basis/')
+            .detectSupport(renderer);
+
+        const loader = new GLTFLoader();
+        loader.setKTX2Loader(ktx2Loader);
+        loader.setMeshoptDecoder(MeshoptDecoder);
+        loader.setDRACOLoader(DRACOLoader)
+
+        loader.load(model_path, function (gltf) {
+            gltf.scene.position.y = 0;
+            scene.add(gltf.scene);
+            render();
+        });
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.addEventListener('change', render); // use if there is no animation loop
+        controls.minDistance = 4; // 最小距离
+        controls.maxDistance = 15; // 最大距离
+        controls.target.set(0, 1, 0); // 目标位置
+        controls.update();
+        // 监听窗口大小变化事件,调用onWindowResize函数
+        window.addEventListener('resize', onWindowResize);
+    }
+    // 在窗口大小变化时,调整相机宽高比、更
+    function onWindowResize() {
+        camera.aspect = aspectRatio;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientWidth / aspectRatio);
+        render();
+    }
+    // 渲染函数,用于使用渲染器渲染当前场景和相机视角
+    function render() {
+        renderer.render(scene, camera);
+    }
+
+</script>

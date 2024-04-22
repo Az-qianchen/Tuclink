@@ -188,7 +188,7 @@ params:
     distance: 1000
     threshold: 0.4
     minMatchCharLength: 0
-    # limit: 10 # 返回搜索数量
+    limit: 10 # 返回搜索数量
     keys: ["title", "permalink", "summary", "content"]
 
 # 暴露信息用于页面，搜索功能

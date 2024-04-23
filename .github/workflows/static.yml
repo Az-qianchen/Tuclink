@@ -59,7 +59,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "https://github.com/Az-qianchen/Tuclink/"          
+            --baseURL "https://az-qianchen.github.io/Tuclink/"          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:

@@ -35,4 +35,42 @@
 
 </body>
 
+<!-- 图片圆角 -->
+<style>
+.post-content img {
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+</style>
+<!-- 图片圆角 -->
+
+<!-- 移动端高度问题使用 dvh -->
+<style>
+.main {
+    position: relative;
+    min-height: calc(100dvh - var(--header-height) - var(--footer-height));
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: auto;
+    padding: var(--gap);
+}
+.main .profile {
+    align-items: center;
+    min-height: calc(100dvh - var(--header-height) - var(--footer-height) - (var(--gap) * 2));
+    text-align: center;
+}
+</style>
+<!-- 移动端高度问题使用 dvh -->
+
 </html>
+
+<!-- 移动端 PWA 界面平铺适配问题 -->
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        updateElementSize();
+    });
+    function updateElementSize() {
+        document.documentElement.style.setProperty('--main-width', '1000px');
+
+    }
+</script>
+<!-- 移动端 PWA 界面平铺适配问题 -->

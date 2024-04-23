@@ -220,21 +220,46 @@
     );
     gl.enableVertexAttribArray(positionAttribLocation);
 
+    var a = 0;
+    var c1 = [0.0,0.0,0.0];
+    var c2 = [0.0,0.0,0.0];
+    var c3 = [0.0,0.0,0.0];
+    var c4 = [0.0,0.0,0.0];
+    var n_a = 0;
+    var n_c1 = [0.0,0.0,0.0];
+    var n_c2 = [0.0,0.0,0.0];
+    var n_c3 = [0.0,0.0,0.0];
+    var n_c4 = [0.0,0.0,0.0];
+
+
+
     // console.log('进入黑暗模式'); 用于打印
     // 同步更新页面主题
     window.addEventListener('storage', (event) => {
     if (localStorage.getItem('pref-theme') === 'dark') {
-      gl.uniform1f(uniformLocations.theme, 0.0);
-      gl.uniform3f(uniformLocations.colour1, 0.0, 0.427, 0.62);
-      gl.uniform3f(uniformLocations.colour2, 0.0, 0.63, 0.43);
-      gl.uniform3f(uniformLocations.colour3, 1.0, 1.0, 1.0);
-      gl.uniform3f(uniformLocations.colour4, 0.0, 0.0, 0.0);
+      a = 0;
+      c1 = [0.0,0.427,0.62];
+      c2 = [0.0,0.63,0.43];
+      c3 = [1.0,1.0,1.0];
+      c4 = [0.0,0.0,0.0];
+      
+      // gl.uniform1f(uniformLocations.theme, 0.0);
+      // gl.uniform3f(uniformLocations.n_colour1, 0.0, 0.427, 0.62);
+      // gl.uniform3f(uniformLocations.n_colour2, 0.0, 0.63, 0.43);
+      // gl.uniform3f(uniformLocations.n_colour3, 1.0, 1.0, 1.0);
+      // gl.uniform3f(uniformLocations.n_colour4, 0.0, 0.0, 0.0);
     } else {
-      gl.uniform1f(uniformLocations.theme, 1.0);
-      gl.uniform3f(uniformLocations.colour1, 0.0, 0.42, 0.61);
-      gl.uniform3f(uniformLocations.colour2, 0.0, 0.61, 0.57);
-      gl.uniform3f(uniformLocations.colour3, 1.0, 1.0, 1.0);
-      gl.uniform3f(uniformLocations.colour4, 1.0, 1.0, 1.0);
+      a = 1;
+      c1 = [0.0,0.42,0.61];
+      c2 = [0.0,0.61,0.57];
+      c3 = [1.0,1.0,1.0];
+      c4 = [1.0,1.0,1.0];
+      
+      // gl.uniform1f(uniformLocations.theme, 1.0);
+      // gl.uniform3f(uniformLocations.n_colour1, 0.0, 0.42, 0.61);
+      // gl.uniform3f(uniformLocations.n_colour2, 0.0, 0.61, 0.57);
+      // gl.uniform3f(uniformLocations.n_colour3, 1.0, 1.0, 1.0);
+      // gl.uniform3f(uniformLocations.n_colour4, 1.0, 1.0, 1.0);
     }
     });
     // 初始化
@@ -247,6 +272,17 @@
       gl.uniform1f(uniformLocations.canvas_width, canvas.width);
       gl.uniform1f(uniformLocations.canvas_height, canvas.height);
 
+      n_a = lerpi(n_a, a, 0.1);
+      n_c1 = lerp(n_c1, c1, 0.1);
+      n_c2 = lerp(n_c2, c2, 0.1);
+      n_c3 = lerp(n_c3, c3, 0.1);
+      n_c4 = lerp(n_c4, c4, 0.1);
+      gl.uniform1f(uniformLocations.theme, n_a);
+      gl.uniform3fv(uniformLocations.colour1, n_c1);
+      gl.uniform3fv(uniformLocations.colour2, n_c2);
+      gl.uniform3fv(uniformLocations.colour3, n_c3);
+      gl.uniform3fv(uniformLocations.colour4, n_c4);
+
       gl.clearColor(0.0, 0.0, 0.0, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
@@ -255,7 +291,10 @@
     render();
     // 插值
     function lerp(a, b, t) {
-    return a + (b - a) * t;
+      return a.map((value, index) => value + (b[index] - value) * t);
+    }
+    function lerpi(a, b, t) {
+      return a + ( b - a ) * t;
     }
   </script>
 </body>

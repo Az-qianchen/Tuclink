@@ -1,5 +1,6 @@
 baseURL: https://az-qianchen.github.io/Tuclink
 # baseURL: https://post.tuclink.com/ # 基础链接（测试无效）
+canonifyurls: true
 defaultContentLanguage: zh # 默认语言
 defaultContentLanguageInSubdir: true # 多语言文件夹
 translationKey: about

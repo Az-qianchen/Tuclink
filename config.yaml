@@ -1,6 +1,6 @@
-baseURL: https://az-qianchen.github.io/Tuclink/
-# baseURL: https://post.tuclink.com/ # 基础链接（测试无效）
-canonifyurls: true # 是否使用绝对路径
+# baseURL: https://az-qianchen.github.io/Tuclink/
+baseURL: https://post.tuclink.com/ # 基础链接（测试无效）
+# canonifyurls: true # 是否使用绝对路径
 defaultContentLanguage: zh # 默认语言
 defaultContentLanguageInSubdir: true # 多语言文件夹
 translationKey: about
@@ -55,7 +55,7 @@ languages: # 翻译
           url: /search/
           weight: 10
         - name: Tags
-          url: tags/
+          url: /tags/
           weight: 15
         - name: List
           url: /post/

@@ -9,6 +9,8 @@
         position: relative;
         border-radius: 10px;
         overflow: hidden;
+        /* width: 100%; */
+        /* height: 100vh; */
     }
 </style>
 
@@ -115,7 +117,15 @@
         window.addEventListener('resize', onWindowResize);
     }
     // 在窗口大小变化时,调整相机宽高比、更
+    window.addEventListener('resize', function() {
+        onWindowResize();
+    });
+    window.addEventListener('DOMContentLoaded', function() {
+        onWindowResize();
+    });
     function onWindowResize() {
+        var aspectRatio = {{ $aspectRatio }}
+        var container = document.getElementById('container_model3d');
         camera.aspect = aspectRatio;
         camera.updateProjectionMatrix();
         renderer.setSize(container.clientWidth, container.clientWidth / aspectRatio);

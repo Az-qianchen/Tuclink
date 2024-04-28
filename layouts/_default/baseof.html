@@ -1,46 +1,53 @@
+
+
+{{- if lt hugo.Version "0.112.4" }}
+{{- errorf "=> hugo v0.112.4 or greater is required for hugo-PaperMod to build " }}
+{{- end -}}
+
 <!DOCTYPE html>
 <html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
 
+<!-- 不刷新音乐 -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
+<script>
+$(document).pjax('a', '#container', {
+    fragment: '#container', //被替换的容器
+    cache: false, //是否使用缓存
+});
+</script>
+<!-- 不刷新音乐 -->
+
 <head>
-    <!-- PWA 实现代码 -->
-    <link rel="manifest" href="/effects/manifest.webmanifest">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="My PWA" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    
-    <script>
-        if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/effects/sw.js');
-        }
-    </script>
-    <!-- PWA 实现代码 -->
     {{- partial "head.html" . }}
 </head>
 
 <body class="
-    {{- if (or (ne .Kind `page`) (eq .Layout `archives`) (eq .Layout `search`)) -}}
-        {{- print "list" -}}
-    {{- end -}}
-    {{- if eq site.Params.defaultTheme `dark` -}}
-        {{- print " dark" -}}
-    {{- end -}}
-    " id="top">
+{{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) -}}
+{{- print "list" -}}
+{{- end -}}
+{{- if eq site.Params.defaultTheme `dark` -}}
+{{- print " dark" }}
+{{- end -}}
+" id="top">
+<div id="container"><!-- 容器 -->
     {{- partialCached "header.html" . .Page -}}
     <main class="main">
         {{- block "main" . }}{{ end }}
     </main>
-    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") }}
-
+    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
+</div><!-- 容器 -->
 </body>
+
+</html>
+
 
 <!-- 图片圆角 -->
 <style>
-.post-content img {
-    border-radius: 10px;
-    margin: 1rem 0;
-}
+    .post-content img {
+        border-radius: 10px;
+        margin: 1rem 0;
+    }
 </style>
 <!-- 图片圆角 -->
 
@@ -61,10 +68,8 @@
 </style>
 <!-- 移动端高度问题使用 dvh -->
 
-</html>
-
 <!-- 移动端 PWA 界面平铺适配问题 -->
-<script>
+<!-- <script>
     window.addEventListener('DOMContentLoaded', function() {
         updateElementSize();
     });
@@ -72,5 +77,24 @@
         document.documentElement.style.setProperty('--main-width', '1000px');
 
     }
-</script>
+</script> -->
 <!-- 移动端 PWA 界面平铺适配问题 -->
+
+<!-- 音乐播放器 -->
+{{ partial "music_player.html" . }}
+<!-- 音乐播放器 -->
+
+<!-- PWA 实现代码 -->
+<link rel="manifest" href="/effects/manifest.webmanifest">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="My PWA" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<script>
+    if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/effects/sw.js');
+    }
+</script>
+<!-- PWA 实现代码 -->

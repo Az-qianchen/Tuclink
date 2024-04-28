@@ -1,0 +1,71 @@
+/* 目录容器配置 */
+.toc {
+    margin: 0 2px 40px 2px;
+    border: 1.2px solid var(--border);
+    background: var(--entry);
+    border-radius: var(--radius);
+    padding: 0.4em;
+}
+
+.toc-container {
+    margin: 10px 0 0 0;
+}
+
+.toc-container.wide {
+    position: absolute;
+    height: 100%;
+    /* border-right: 1px solid var(--border); */
+    left: calc((var(--toc-width) + var(--gap)) * -0.85);
+    top: calc(var(--gap) * 1);
+    width: var(--toc-width);
+}
+
+.wide .toc {
+    position: sticky;
+    top: var(--gap);
+    border: unset;
+    background: unset;
+    border-radius: unset;
+    width: 100%;
+    margin: 0 2px 40px 2px;
+}
+
+/* 目录标题 */
+.toc details summary {
+    font-size: 20px;
+    font-weight: bold;
+    margin-inline-start: 0;
+}
+
+
+
+/* 目录内容边距 */
+.toc-container.wide .toc .inner {
+    margin: 18px;
+}
+/* 目录内容框 */
+/* .toc li a.active {
+    border-radius: 4px;
+    background-color: #000000;
+    display: block;
+    padding: 5px 5px;
+} */
+
+/* 选中底栏颜色 */
+.active {
+    border-bottom: 2px solid transparent;
+    border-bottom-color: #42b983;
+}
+
+/* 目录列前图标隐藏 */
+.toc .inner {
+    padding: 0;
+    overflow-y: auto;
+}
+
+/* 目录列配置 */
+.toc li {
+    font-size: 16px;
+    padding: 5px;
+}
+

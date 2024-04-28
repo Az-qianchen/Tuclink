@@ -1,0 +1,77 @@
+/* https://www.lvbibir.cn/posts/blog/hello-hugo */
+/*
+This is just a placeholder blank stylesheet so as to support adding custom styles budled with theme's default styles
+
+Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info
+*/
+/* 目录宽度 */
+:root {
+    --article-width: 650px;/* 用于判断目录隐藏 */
+    --toc-width: 230px;
+}
+
+/*图片圆角*/
+img {
+    border-radius: 10px;
+}
+
+/*代码里的滚动*/
+@media screen and (min-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 15px;
+        height: 13px;
+    }
+}
+
+/*页面顶部栏两边宽度*/
+.nav {
+    max-width: calc(var(--nav-width) + var(--gap) * 10);
+}
+
+.main {
+    max-width: calc(var(--main-width) + var(--gap) * 5);
+}
+
+/*字体*/
+/* .post-content {
+    font-family: Consolas, "LXGWWenKaiLite-Bold";
+} */
+
+
+/* https://www.sulvblog.cn/posts/blog/img_right/ */
+/* 列表样式 */
+.post-entry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.entry-cover {
+    text-align: right;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 60%;
+    max-height: 120px;
+    margin: 0; /* 重置 margin 属性 */
+    margin-left: 20px; /* 添加左外边距 */
+    order: 2; /* 顺序调整到最后 */
+    display: grid;
+    align-content: center;
+}
+
+/*---------------------------*/
+.topInner {
+    display: grid;
+    align-items: baseline;
+    justify-items: center;
+    margin: 7px;
+    font-weight: 900;
+}
+
+.topSvg {
+    width: 20px;
+}
+
+.top-link {
+    padding: unset;
+}

@@ -6,7 +6,7 @@ date: "2024-04-21"  # 日期
 weight: 1 # 权重用于排序
 searchHidden: false # 是否不被搜索
 layout: "baseof" # 布局模板
-draft: false # 是否隐藏
+draft: true # 是否隐藏
 description: "功能测试" # 介绍
 hidemeta: false # 是否隐藏元数据
 

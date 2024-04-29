@@ -1,0 +1,344 @@
+---
+tags: ["web"] # 标签
+author: "仟尘" # 作者
+title: "为网站添加 WebGL 背景" # 标题
+date: "2024-04-29" # 日期
+weight: 1 # 权重用于排序
+searchHidden: false # 是否不被搜索
+layout: "baseof" # 布局模板
+draft: flase # 是否隐藏
+
+description: "WebGL 设置分享" # 页面描述、面向搜索引擎用户
+summary: "WebGL 设置分享" # 页面描述、面向社交媒体用户
+Keywords: "WebGL,Shader,Web,背景)" # 网站关键词（SEO）
+
+---
+---
+以下为核心的 HTML 代码，可以直接复制粘贴到网站的 HTML 文件中
+我对 HTML 并不是非常熟悉，所以很可能有更好的实现方式，欢迎大家指正
+``` html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>WebGL Example</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #webgl-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #webgl-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="webgl-container">
+    <canvas id="webgl-canvas"></canvas>
+  </div>
+
+  <script>
+    // 初始化WebGL上下文
+    const canvas = document.getElementById('webgl-canvas');
+    const gl = canvas.getContext('webgl');
+
+    // 设置画布大小为全屏
+    function resizeCanvas() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // 顶点着色器代码
+    const vertexShaderSource = `
+      attribute vec2 position;
+      void main() {
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    // 片元着色器代码
+    const fragmentShaderSource = `
+      precision highp float;
+
+      uniform float theme;
+
+      uniform vec3 colour1;
+      uniform vec3 colour2;
+      uniform vec3 colour3;
+      uniform vec3 colour4;
+      uniform int contrast;
+      uniform float gradual;
+      uniform float width1;
+      uniform float width2;
+      uniform float scale1;
+      uniform float scale2;
+      uniform vec2 offset;
+      uniform float intensity;
+      uniform float spin_speed;
+      uniform float spin_amount;
+      uniform float time;
+      uniform float canvas_width; // 新增画布宽度uniform变量
+      uniform float canvas_height; // 新增画布高度uniform变量
+
+      void main() {
+        float speed = time * spin_speed;
+        // 无拉伸屏幕 UV;
+        vec2 uv = gl_FragCoord.xy / canvas_height;
+        // 居中 UV
+        float center = canvas_width / canvas_height;
+        uv.y -= 0.5;
+        uv.x -= 0.5 * center;
+        uv *= 2.0;
+        uv += offset;
+        float uv_len = length(uv);
+        // 获得角度信息
+        float angle = atan(uv.y, uv.x);
+        // 根据距离衰减旋转
+        angle -= spin_amount * uv_len;
+        // 角度旋转动画
+        angle += speed;
+        // 根据距离应用旋转
+        uv = vec2(uv_len * cos(angle), uv_len * sin(angle)) * scale2;
+        // UV 扭曲效果
+        uv *= scale1;
+        vec2 uv2 = vec2(uv.x + uv.y);
+        for (int i = 0; i < 5; i++) {
+            uv2 += sin(uv);
+            uv += vec2(cos(intensity * uv2.y + speed), sin(intensity * uv2.x - speed));
+            uv -= cos(uv.x + uv.y) - sin(uv.x - uv.y);
+        }
+        // 强度值
+        float paint_res = smoothstep(0.0, gradual, length(uv) / scale1);
+        // 色块划分
+        float c3p = 1.0 - min(width2, abs(paint_res - 0.5)) * (1.0 / width2);
+        float c_out = max(0.0, (paint_res - (1.0 - width1))) * (1.0 / width1);
+        float c_in = max(0.0, -(paint_res - width1)) * (1.0 / width1);
+        float c4p = c_out + c_in;
+        // 颜色应用
+        vec3 ret_col = mix(colour1, colour2, paint_res);
+        ret_col = mix(ret_col, colour3, c3p);
+        ret_col = mix(ret_col, colour4, c4p);
+        gl_FragColor = vec4(ret_col * mix(uv_len / 2.0, 1.0, theme), 1.0);
+        // gl_FragColor = vec4(uv.y); // 纯红色
+      }
+    `;
+
+    // 创建和编译着色器
+    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShader, vertexShaderSource);
+    gl.compileShader(vertexShader);
+
+    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fragmentShader, fragmentShaderSource);
+    gl.compileShader(fragmentShader);
+
+    // 创建程序对象并链接着色器
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+
+    // 检查链接是否成功
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error('Unable to link the shader program: ' + gl.getProgramInfoLog(program));
+    }
+
+    if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+      console.error('Failed to compile vertex shader: ' + gl.getShaderInfoLog(vertexShader));
+    }
+
+    if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+      console.error('Failed to compile fragment shader: ' + gl.getShaderInfoLog(fragmentShader));
+    }
+
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error('Unable to link the shader program: ' + gl.getProgramInfoLog(program));
+    }
+
+    // 使用程序对象
+    gl.useProgram(program);
+
+    // 设置顶点数据
+    const vertexData = new Float32Array([
+      -1.0, 1.0, // 第一个顶点
+      -1.0, -1.0, // 第二个顶点
+      1.0, -1.0, // 第三个顶点
+      1.0, 1.0 // 第四个顶点
+    ]);
+
+    // 设置变量
+    const uniformLocations = {
+      theme: gl.getUniformLocation(program, 'theme'),
+      colour1: gl.getUniformLocation(program, 'colour1'),
+      colour2: gl.getUniformLocation(program, 'colour2'),
+      colour3: gl.getUniformLocation(program, 'colour3'),
+      colour4: gl.getUniformLocation(program, 'colour4'),
+      contrast: gl.getUniformLocation(program, 'contrast'),
+      gradual: gl.getUniformLocation(program, 'gradual'),
+      width1: gl.getUniformLocation(program, 'width1'),
+      width2: gl.getUniformLocation(program, 'width2'),
+      scale1: gl.getUniformLocation(program,'scale1'),
+      scale2: gl.getUniformLocation(program,'scale2'),
+      offset: gl.getUniformLocation(program, 'offset'),
+      intensity: gl.getUniformLocation(program, 'intensity'),
+      spin_speed: gl.getUniformLocation(program,'spin_speed'),
+      spin_amount: gl.getUniformLocation(program,'spin_amount'),
+      time: gl.getUniformLocation(program, 'time'),
+      canvas_width: gl.getUniformLocation(program, 'canvas_width'),
+      canvas_height: gl.getUniformLocation(program, 'canvas_height')
+    };
+
+    // 设置uniform变量的值
+    gl.uniform1f(uniformLocations.theme, 0);
+    gl.uniform3f(uniformLocations.colour1, 0.0, 0.427, 0.62);
+    gl.uniform3f(uniformLocations.colour2, 0.0, 0.63, 0.43);
+    gl.uniform3f(uniformLocations.colour3, 1.0, 1.0, 1.0);
+    gl.uniform3f(uniformLocations.colour4, 0.0, 0.0, 0.0);
+    gl.uniform1i(uniformLocations.contrast, 5);
+    gl.uniform1f(uniformLocations.gradual, 2.0);
+    gl.uniform1f(uniformLocations.width1, 0.2);
+    gl.uniform1f(uniformLocations.width2, 0.1);
+    gl.uniform1f(uniformLocations.scale1, 10.0);
+    gl.uniform1f(uniformLocations.scale2, 1.0);
+    gl.uniform2f(uniformLocations.offset, 0.0, 0.0);
+    gl.uniform1f(uniformLocations.intensity, 0.2);
+    gl.uniform1f(uniformLocations.spin_speed, 0.2);
+    gl.uniform1f(uniformLocations.spin_amount, 1.5);
+    gl.uniform1f(uniformLocations.time, 1.0);
+    gl.uniform1f(uniformLocations.canvas_width, canvas.width);
+    gl.uniform1f(uniformLocations.canvas_height, canvas.height);
+
+    const vertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
+
+    const positionAttribLocation = gl.getAttribLocation(program, 'position');
+    gl.vertexAttribPointer(
+      positionAttribLocation,
+      2, // 每个顶点有2个分量(x, y)
+      gl.FLOAT, // 数据类型是32位浮点数
+      false,
+      2 * Float32Array.BYTES_PER_ELEMENT, // 步长
+      0 // 偏移量
+    );
+    gl.enableVertexAttribArray(positionAttribLocation);
+
+    var a = 0;
+    var c1 = [0.0,0.0,0.0];
+    var c2 = [0.0,0.0,0.0];
+    var c3 = [0.0,0.0,0.0];
+    var c4 = [0.0,0.0,0.0];
+    var n_a = 0;
+    var n_c1 = [0.0,0.0,0.0];
+    var n_c2 = [0.0,0.0,0.0];
+    var n_c3 = [0.0,0.0,0.0];
+    var n_c4 = [0.0,0.0,0.0];
+
+
+
+    // console.log('进入黑暗模式'); 用于打印
+    // 同步更新页面主题
+    window.addEventListener('storage', (event) => {
+    if (localStorage.getItem('pref-theme') === 'dark') {
+      a = 0;
+      c1 = [0.0,0.427,0.62];
+      c2 = [0.0,0.63,0.43];
+      c3 = [1.0,1.0,1.0];
+      c4 = [0.0,0.0,0.0];
+      
+      // gl.uniform1f(uniformLocations.theme, 0.0);
+      // gl.uniform3f(uniformLocations.n_colour1, 0.0, 0.427, 0.62);
+      // gl.uniform3f(uniformLocations.n_colour2, 0.0, 0.63, 0.43);
+      // gl.uniform3f(uniformLocations.n_colour3, 1.0, 1.0, 1.0);
+      // gl.uniform3f(uniformLocations.n_colour4, 0.0, 0.0, 0.0);
+    } else {
+      a = 1;
+      c1 = [0.0,0.42,0.61];
+      c2 = [0.0,0.61,0.57];
+      c3 = [1.0,1.0,1.0];
+      c4 = [1.0,1.0,1.0];
+      
+      // gl.uniform1f(uniformLocations.theme, 1.0);
+      // gl.uniform3f(uniformLocations.n_colour1, 0.0, 0.42, 0.61);
+      // gl.uniform3f(uniformLocations.n_colour2, 0.0, 0.61, 0.57);
+      // gl.uniform3f(uniformLocations.n_colour3, 1.0, 1.0, 1.0);
+      // gl.uniform3f(uniformLocations.n_colour4, 1.0, 1.0, 1.0);
+    }
+    });
+    // 初始化
+    window.dispatchEvent(new Event('storage'));
+  
+    // 清除画布并绘制三角形
+    function render() {
+      // 实时更新的值
+      gl.uniform1f(uniformLocations.time, performance.now() / 1000.0);
+      gl.uniform1f(uniformLocations.canvas_width, canvas.width);
+      gl.uniform1f(uniformLocations.canvas_height, canvas.height);
+
+      n_a = lerpi(n_a, a, 0.1);
+      n_c1 = lerp(n_c1, c1, 0.1);
+      n_c2 = lerp(n_c2, c2, 0.1);
+      n_c3 = lerp(n_c3, c3, 0.1);
+      n_c4 = lerp(n_c4, c4, 0.1);
+      gl.uniform1f(uniformLocations.theme, n_a);
+      gl.uniform3fv(uniformLocations.colour1, n_c1);
+      gl.uniform3fv(uniformLocations.colour2, n_c2);
+      gl.uniform3fv(uniformLocations.colour3, n_c3);
+      gl.uniform3fv(uniformLocations.colour4, n_c4);
+
+      gl.clearColor(0.0, 0.0, 0.0, 1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+      requestAnimationFrame(render);
+    }
+    render();
+    // 插值
+    function lerp(a, b, t) {
+      return a.map((value, index) => value + (b[index] - value) * t);
+    }
+    function lerpi(a, b, t) {
+      return a + ( b - a ) * t;
+    }
+  </script>
+</body>
+</html>
+```
+只需要将以上 HTML 文件插入到页面中
+```html
+<iframe id="webgl-background" src="/html/WebGL.html" width="100%" height="100%" frameborder="0"></iframe>
+```
+再设置一下 CSS 样式即可作为背景使用
+```html
+<style>
+<!-- 头像缩放适配 -->
+<!-- 背景/隐藏滚动条 -->
+<style>
+iframe#webgl-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -999;
+	border: none;
+	pointer-events: none;
+}
+</style>
+```
+最后因为为了实现主题的切换其实带有一些冗余代码在实际的使用过程中可以进行优化删除

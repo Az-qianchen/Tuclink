@@ -106,6 +106,35 @@
       {{- end }}
     </a>
     {{- end }}
+
+
+    {{- if not (eq $paginator.PageNumber 1) }}
+    <span class="numFirst">
+      <a class="pageFirst" href="{{ $paginator.First.URL | absURL }}" data-pjax="false">{{ "1" }}</a>
+    </span>
+    {{- if not (eq $paginator.PageNumber 2) }}
+    &nbsp;...&nbsp;
+    <span class="numPrev">
+        <a class="pagePrev" href="{{ $paginator.Prev.URL | absURL }}" data-pjax="false">{{ sub $paginator.PageNumber 1 }}</a>
+    </span>
+    {{- end }}
+    {{- end }}
+    <span class="pageNum">
+      <a class="pageNow" href="{{ $paginator.URL | absURL }}" data-pjax="false">{{ $paginator.PageNumber }}</a>
+    </span>
+    {{- if not (eq $paginator.PageNumber $paginator.TotalPages) }}
+    {{- if not (eq $paginator.PageNumber ( sub $paginator.TotalPages 1)) }}
+    <span class="numNext">
+      <a class="pageNext" href="{{ $paginator.Next.URL | absURL }}" data-pjax="false">{{ add $paginator.PageNumber 1 }}</a>
+    </span>
+    &nbsp;...&nbsp;
+    {{- end }}
+    <span class="numLast">
+      <a class="pageLast" href="{{ $paginator.Last.URL | absURL }}" data-pjax="false">{{ $paginator.TotalPages }}</a>
+    </span>
+    {{- end }}
+
+    
     {{- if $paginator.HasNext }}
     <!-- 添加data-pjax="false"以让pjax忽视 -->
     <a class="next" href="{{ $paginator.Next.URL | absURL }}" data-pjax="false">
@@ -115,6 +144,9 @@
       {{- end }}&nbsp;»
     </a>
     {{- end }}
+
+
+
   </nav>
 </footer>
 </div><!-- 添加一层容器 -->

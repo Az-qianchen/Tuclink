@@ -1,0 +1,68 @@
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- if and (gt (len $pages) 1) (in $pages . ) }}
+<nav class="post-paginav">
+  {{- with $pages.Next . }}
+  <a class="post-prev-link" href="{{ .Permalink }}" data-pjax="false">
+    <span class="title">« {{ i18n "prev_page" }}</span>
+    <br>
+    <span class="post-prev-title">{{- .Name -}}</span>
+  </a>
+  {{- end }}
+  {{- with $pages.Prev . }}
+  <a class="post-next-link" href="{{ .Permalink }}" data-pjax="false">
+    <span class="title">{{ i18n "next_page" }} »</span>
+    <br>
+    <span class="post-next-title">{{- .Name -}}</span>
+  </a>
+  {{- end }}
+</nav>
+{{- end }}
+
+<style>
+/* 左右排布 */
+.post-paginav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.post-prev-link,
+.post-next-link {
+  width: 100%;
+  display: inline-block;
+}
+.post-prev-link {
+  text-align: left;
+}
+.post-next-link {
+  text-align: right;
+}
+/* 文字长度限制 */
+.post-prev-title,
+.post-next-title {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* 选中下划线 */
+.post-prev-link,
+.post-next-link {
+  text-decoration: none;
+  transition: transform 0.4s; /* 添加过渡效果 */
+}
+.post-prev-link:hover,
+.post-next-link:hover {
+  text-decoration: underline; /* 显示下划线 */
+  text-decoration-color: #42b983; /* 设置下划线颜色为西红柿红色 */
+  text-decoration-thickness: 2px; /* 设置下划线宽度为 2 像素 */
+  text-underline-offset: 4px; /* 设置下划线与文本之间的偏移距离为 3 像素 */
+  transform: scale(1.05); /* 鼠标悬停时缩放 1.05 倍 */
+}
+/* 标题字体 */
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>

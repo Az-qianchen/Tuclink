@@ -1,7 +1,7 @@
 ---
 tags: ["图片"] # 标签
 author: "仟尘" # 作者
-title: "图片分享" # 标题
+title: "图片分享·1" # 标题
 date: "2024-04-28" # 日期
 weight: 1 # 权重用于排序
 searchHidden: false # 是否不被搜索

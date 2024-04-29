@@ -43,7 +43,7 @@ Super Ball 功能开发切片
 
 个人的素材使用主要是 itch 的免费音效，[kenney](https://kenney.nl/assets/category:Audio?sort=update) 提供的免费音效，再次感谢无私的开源者们
 
-在 Godot 4.3 音乐管理方面又会带来[增强](https://github.com/godotengine/godot/pull/64488)，会新增播放列表，和多个音频的分层播放，还是很期待的，也感谢 Godot 社区的贡献者们
+在 Godot 4.3 音乐管理方面又会带来 [增强](https://github.com/godotengine/godot/pull/64488)，会新增播放列表，和多个音频的分层播放，还是很期待的，也感谢 Godot 社区的贡献者们
 
 ---
 

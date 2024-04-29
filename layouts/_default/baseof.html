@@ -1,3 +1,7 @@
+<!-- light gallery -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/lightgallery.min.js" integrity="sha384-SMXsJkdv0pWRFF7S1lZPUvnBOw2WnTKw88DRxOqLysifuSomt1/jdArjX6c+d8yu" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/plugins/pager/lg-pager.min.js" integrity="sha384-KWUYFmH9+fIKCHDl+8GwbHvmGw3Q4qk0mVB1BBRznlQIZma3czxxpeVQtD71bM64" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/plugins/zoom/lg-zoom.min.js" integrity="sha384-B2e5p5SHlYQtPrvEdMpFrKtwNN5cJgFgKWpZBLdEmgjDjaPKl7bVh0masHqDdHoc" crossorigin="anonymous"></script> -->
 
 
 {{- if lt hugo.Version "0.112.4" }}
@@ -5,19 +9,20 @@
 {{- end -}}
 
 <!DOCTYPE html>
-<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
 
 <!-- 不刷新音乐 -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
+
 <script>
-$(document).pjax('a', '#container', {
-    fragment: '#container', //被替换的容器
-    cache: false, //是否使用缓存
-});
+    $(document).pjax('a', '#container', {
+        fragment: '#container', //被替换的容器
+        cache: true, //是否使用缓存
+    });
 </script>
 <!-- 不刷新音乐 -->
 
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
 <head>
     {{- partial "head.html" . }}
 </head>

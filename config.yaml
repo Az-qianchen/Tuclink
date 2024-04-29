@@ -27,7 +27,7 @@ languages: # 翻译
     weight: 1
     menu:
       main:
-        - name: 文章
+        - name: 列表
           url: /archives/
           weight: 5
         - name: 搜索
@@ -36,7 +36,7 @@ languages: # 翻译
         - name: 标签
           url: /tags/
           weight: 15
-        - name: 列表
+        - name: 文章
           url: /post/
           weight: 20
   en:
@@ -54,7 +54,7 @@ languages: # 翻译
         - name: Tags
           url: /tags/
           weight: 15
-        - name: List
+        - name: Post
           url: /post/
           weight: 20
 
@@ -96,7 +96,9 @@ params:
   # ShowCodeCopyButtons: true
   # ShowPostNavLinks: true
   # Email: hello@example.com
-
+  ShowAuthor: true
+  ShowWordCount: true
+  ShowReadingTime: true
 
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: 突触递质
@@ -114,7 +116,7 @@ params:
   # ShowWordCount: true # 字数统计
   # ShowReadingTime: true # 阅读时间
   # ShowShareButtons: false # 分享按钮
-  # ShowPostNavLinks: true # 导航链接（上下篇内容）
+  ShowPostNavLinks: true # 导航链接（上下篇内容）
   # ShowRssButtonInSectionTermList: true # RSS 按钮
   # disableScrollToTop: false # 禁用回到顶部按钮
   # disableSpecial1stPost: false # 禁用第一篇文章特殊布局
@@ -154,9 +156,8 @@ params:
     imageHeight: 300
     imageTitle: my image
     # buttons:
-    #   - name: Posts
-    #     url: /home_info
-
+    #   - name: Shader
+    #     url: "/zh/post/shader/"
 # 家庭模式
   # homeInfoParams:
   #   Title: TucLink
@@ -217,23 +218,6 @@ outputs:
         - RSS
         - JSON
 
-# 菜单
-menu:
-  main:
-    - identifier: 文章
-      name: 文章
-      url: /archive/
-      weight: 10
-    - identifier: 搜索
-      name: 搜索
-      url: /search/
-      weight: 20
-    - identifier: 标签
-      name: 标签
-      url: /tags/
-      weight: 30
-# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-
 # 代码高亮
 pygmentsUseClasses: true
 
@@ -247,9 +231,12 @@ markup: # X
     noClasses: true # 使用 class 标签，而不是内嵌的内联样式
     codeFences: true # 代码围栏功能，这个功能一般都要设为 true 的，不然很难看，就是干巴巴的-代码文字，没有颜色。
     guessSyntax: true # 猜测语法，这个功能建议设置为 true, 如果你没有设置要显示的语言则会自动匹配。
-    lineNos: true # 是否显示行号
+    # lineNos: true # 是否显示行号
     # anchorLineNos: true
     # style: monokai
     # hl_Lines：高亮的行号，一般这个不设置，因为每个代码块我们可能希望让高亮的地方不一样。
     # lineNoStart：行号从编号几开始，一般从 1 开始。
     # lineNumbersInTable：使用表来格式化行号和代码,而不是 标签。这个属性一般设置为 true.
+
+
+# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma

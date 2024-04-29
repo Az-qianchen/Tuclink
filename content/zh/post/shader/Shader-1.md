@@ -17,7 +17,7 @@ Keywords: "Godot,Shader,暗角,虚化,黑白,缩放,瓷砖动画,条纹,方形,�
 使用演示
 {{< bilibili BV1Wi42127Mp >}}
 
-```
+``` c
 shader_type canvas_item;
 
 uniform bool graph_switch = false; // 图形开关
@@ -107,12 +107,3 @@ void fragment(){
 }
 ```
 以上为 Godot Shader 代码，有任何问题欢迎进行留言
-
----
-
-这是一个我使用在我自己项目中的 Shader 分享给大家，但如果可以的话还请大家能帮我一个小忙
-
-目前我在开发一个多人游戏，但我自己很难完全进行游戏的玩法测试，所以如果各位感兴趣的话可以进一下游戏的微信测试群
-
-或是想要进行技术交流也可以进行添加，感谢各位了
-![imagen](/picture/wx.jpg)

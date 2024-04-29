@@ -19,7 +19,7 @@ Keywords: "Godot,Shader,扭曲背景)" # 网站关键词（SEO）
 实现解析
 {{< bilibili BV1R1421d7ta >}}
 
-```
+``` C
 shader_type canvas_item;
 
 uniform vec3 colour1 : source_color = vec3(1.0, 0.0, 0.0);

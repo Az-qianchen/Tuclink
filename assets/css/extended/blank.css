@@ -16,7 +16,7 @@ img {
 }
 
 /*代码里的滚动*/
-@media screen and (min-width: 768px) {
+@media screen {
     ::-webkit-scrollbar {
         width: 15px;
         height: 13px;
@@ -37,6 +37,12 @@ img {
     font-family: Consolas, "LXGWWenKaiLite-Bold";
 } */
 
+/* 行间距 */
+.post-content p {
+    margin-bottom:30px;
+    /* 所有首行缩进 */
+    /* text-indent: 2em;  */
+}
 
 /* https://www.sulvblog.cn/posts/blog/img_right/ */
 /* 列表样式 */
@@ -50,7 +56,8 @@ img {
     text-align: right;
     border-radius: 10px;
     overflow: hidden;
-    width: 60%;
+    width: 100%;
+    max-width: 240px;
     max-height: 120px;
     margin: 0; /* 重置 margin 属性 */
     margin-left: 20px; /* 添加左外边距 */
@@ -67,11 +74,18 @@ img {
     margin: 7px;
     font-weight: 900;
 }
-
 .topSvg {
     width: 20px;
 }
-
 .top-link {
     padding: unset;
+}
+.topInner:hover {
+    color: #42b983;
+}
+
+
+/* 文章标题选中变色 */
+.post-entry:hover .entry-header h2 {
+    color: #42b983;
 }

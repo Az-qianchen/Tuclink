@@ -1,0 +1,26 @@
+.post-content code {
+    font-family: Consolas, "LXGWWenKaiLite-Bold";
+    margin: 0px;
+    padding: 2px 2px;
+}
+
+.post-content pre code {
+    max-height: 50em; /* 限制高度 */
+    margin-bottom: 20px; /* 底部边距 */
+    font-family: Consolas, "LXGWWenKaiLite-Bold";
+}
+
+/*解决角落显示方块问题*/
+::-webkit-scrollbar-corner {
+    background-color: var(--hljs-bg);
+    border-radius: 10px;
+}
+ /* 滚动条宽度 */
+.post-content :not(table)::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.post-content :not(table)::-webkit-scrollbar-thumb {
+    border: 1px solid var(--hljs-bg);
+}

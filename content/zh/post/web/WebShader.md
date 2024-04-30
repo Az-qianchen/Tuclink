@@ -78,10 +78,16 @@ Keywords: "WebGL,Shader,Web,背景)" # 网站关键词（SEO）
 
       uniform float theme;
 
-      uniform vec3 colour1;
-      uniform vec3 colour2;
-      uniform vec3 colour3;
-      uniform vec3 colour4;
+      uniform vec3 w_colour1;
+      uniform vec3 w_colour2;
+      uniform vec3 w_colour3;
+      uniform vec3 w_colour4;
+
+      uniform vec3 b_colour1;
+      uniform vec3 b_colour2;
+      uniform vec3 b_colour3;
+      uniform vec3 b_colour4;
+
       uniform int contrast;
       uniform float gradual;
       uniform float width1;
@@ -97,6 +103,11 @@ Keywords: "WebGL,Shader,Web,背景)" # 网站关键词（SEO）
       uniform float canvas_height; // 新增画布高度uniform变量
 
       void main() {
+        vec3 colour1 = mix(w_colour1, b_colour1, theme);
+        vec3 colour2 = mix(w_colour2, b_colour2, theme);
+        vec3 colour3 = mix(w_colour3, b_colour3, theme);
+        vec3 colour4 = mix(w_colour4, b_colour4, theme);
+
         float speed = time * spin_speed;
         // 无拉伸屏幕 UV;
         vec2 uv = gl_FragCoord.xy / canvas_height;
@@ -185,10 +196,16 @@ Keywords: "WebGL,Shader,Web,背景)" # 网站关键词（SEO）
     // 设置变量
     const uniformLocations = {
       theme: gl.getUniformLocation(program, 'theme'),
-      colour1: gl.getUniformLocation(program, 'colour1'),
-      colour2: gl.getUniformLocation(program, 'colour2'),
-      colour3: gl.getUniformLocation(program, 'colour3'),
-      colour4: gl.getUniformLocation(program, 'colour4'),
+      w_colour1: gl.getUniformLocation(program, 'w_colour1'),
+      w_colour2: gl.getUniformLocation(program, 'w_colour2'),
+      w_colour3: gl.getUniformLocation(program, 'w_colour3'),
+      w_colour4: gl.getUniformLocation(program, 'w_colour4'),
+
+      b_colour1: gl.getUniformLocation(program, 'b_colour1'),
+      b_colour2: gl.getUniformLocation(program, 'b_colour2'),
+      b_colour3: gl.getUniformLocation(program, 'b_colour3'),
+      b_colour4: gl.getUniformLocation(program, 'b_colour4'),
+
       contrast: gl.getUniformLocation(program, 'contrast'),
       gradual: gl.getUniformLocation(program, 'gradual'),
       width1: gl.getUniformLocation(program, 'width1'),
@@ -206,10 +223,16 @@ Keywords: "WebGL,Shader,Web,背景)" # 网站关键词（SEO）
 
     // 设置uniform变量的值
     gl.uniform1f(uniformLocations.theme, 0);
-    gl.uniform3f(uniformLocations.colour1, 0.0, 0.427, 0.62);
-    gl.uniform3f(uniformLocations.colour2, 0.0, 0.63, 0.43);
-    gl.uniform3f(uniformLocations.colour3, 1.0, 1.0, 1.0);
-    gl.uniform3f(uniformLocations.colour4, 0.0, 0.0, 0.0);
+    gl.uniform3f(uniformLocations.w_colour1, 0.0, 0.427, 0.62);
+    gl.uniform3f(uniformLocations.w_colour2, 0.0, 0.63, 0.43);
+    gl.uniform3f(uniformLocations.w_colour3, 1.0, 1.0, 1.0);
+    gl.uniform3f(uniformLocations.w_colour4, 0.0, 0.0, 0.0);
+
+    gl.uniform3f(uniformLocations.b_colour1, 0.0, 0.42, 0.61);
+    gl.uniform3f(uniformLocations.b_colour2, 0.0, 0.61, 0.57);
+    gl.uniform3f(uniformLocations.b_colour3, 1.0, 1.0, 1.0);
+    gl.uniform3f(uniformLocations.b_colour4, 1.0, 1.0, 1.0);
+
     gl.uniform1i(uniformLocations.contrast, 5);
     gl.uniform1f(uniformLocations.gradual, 2.0);
     gl.uniform1f(uniformLocations.width1, 0.2);
@@ -240,45 +263,14 @@ Keywords: "WebGL,Shader,Web,背景)" # 网站关键词（SEO）
     gl.enableVertexAttribArray(positionAttribLocation);
 
     var a = 0;
-    var c1 = [0.0,0.0,0.0];
-    var c2 = [0.0,0.0,0.0];
-    var c3 = [0.0,0.0,0.0];
-    var c4 = [0.0,0.0,0.0];
     var n_a = 0;
-    var n_c1 = [0.0,0.0,0.0];
-    var n_c2 = [0.0,0.0,0.0];
-    var n_c3 = [0.0,0.0,0.0];
-    var n_c4 = [0.0,0.0,0.0];
 
-
-
-    // console.log('进入黑暗模式'); 用于打印
     // 同步更新页面主题
     window.addEventListener('storage', (event) => {
     if (localStorage.getItem('pref-theme') === 'dark') {
       a = 0;
-      c1 = [0.0,0.427,0.62];
-      c2 = [0.0,0.63,0.43];
-      c3 = [1.0,1.0,1.0];
-      c4 = [0.0,0.0,0.0];
-      
-      // gl.uniform1f(uniformLocations.theme, 0.0);
-      // gl.uniform3f(uniformLocations.n_colour1, 0.0, 0.427, 0.62);
-      // gl.uniform3f(uniformLocations.n_colour2, 0.0, 0.63, 0.43);
-      // gl.uniform3f(uniformLocations.n_colour3, 1.0, 1.0, 1.0);
-      // gl.uniform3f(uniformLocations.n_colour4, 0.0, 0.0, 0.0);
     } else {
       a = 1;
-      c1 = [0.0,0.42,0.61];
-      c2 = [0.0,0.61,0.57];
-      c3 = [1.0,1.0,1.0];
-      c4 = [1.0,1.0,1.0];
-      
-      // gl.uniform1f(uniformLocations.theme, 1.0);
-      // gl.uniform3f(uniformLocations.n_colour1, 0.0, 0.42, 0.61);
-      // gl.uniform3f(uniformLocations.n_colour2, 0.0, 0.61, 0.57);
-      // gl.uniform3f(uniformLocations.n_colour3, 1.0, 1.0, 1.0);
-      // gl.uniform3f(uniformLocations.n_colour4, 1.0, 1.0, 1.0);
     }
     });
     // 初始化
@@ -290,17 +282,12 @@ Keywords: "WebGL,Shader,Web,背景)" # 网站关键词（SEO）
       gl.uniform1f(uniformLocations.time, performance.now() / 1000.0);
       gl.uniform1f(uniformLocations.canvas_width, canvas.width);
       gl.uniform1f(uniformLocations.canvas_height, canvas.height);
-
-      n_a = lerpi(n_a, a, 0.1);
-      n_c1 = lerp(n_c1, c1, 0.1);
-      n_c2 = lerp(n_c2, c2, 0.1);
-      n_c3 = lerp(n_c3, c3, 0.1);
-      n_c4 = lerp(n_c4, c4, 0.1);
+      if (n_a == a) {
+        n_a = a;
+      } else {
+        n_a = lerpi(n_a, a, 0.4);
+      }
       gl.uniform1f(uniformLocations.theme, n_a);
-      gl.uniform3fv(uniformLocations.colour1, n_c1);
-      gl.uniform3fv(uniformLocations.colour2, n_c2);
-      gl.uniform3fv(uniformLocations.colour3, n_c3);
-      gl.uniform3fv(uniformLocations.colour4, n_c4);
 
       gl.clearColor(0.0, 0.0, 0.0, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -309,15 +296,13 @@ Keywords: "WebGL,Shader,Web,背景)" # 网站关键词（SEO）
     }
     render();
     // 插值
-    function lerp(a, b, t) {
-      return a.map((value, index) => value + (b[index] - value) * t);
-    }
     function lerpi(a, b, t) {
       return a + ( b - a ) * t;
     }
   </script>
 </body>
 </html>
+
 ```
 只需要将以上 HTML 文件插入到页面中
 ```html
@@ -341,4 +326,3 @@ iframe#webgl-background {
 }
 </style>
 ```
-最后因为为了实现主题的切换其实带有一些冗余代码在实际的使用过程中可以进行优化删除

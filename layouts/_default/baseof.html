@@ -3,7 +3,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/plugins/pager/lg-pager.min.js" integrity="sha384-KWUYFmH9+fIKCHDl+8GwbHvmGw3Q4qk0mVB1BBRznlQIZma3czxxpeVQtD71bM64" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/plugins/zoom/lg-zoom.min.js" integrity="sha384-B2e5p5SHlYQtPrvEdMpFrKtwNN5cJgFgKWpZBLdEmgjDjaPKl7bVh0masHqDdHoc" crossorigin="anonymous"></script> -->
 
-
 {{- if lt hugo.Version "0.112.4" }}
 {{- errorf "=> hugo v0.112.4 or greater is required for hugo-PaperMod to build " }}
 {{- end -}}
@@ -21,6 +20,19 @@
     });
 </script>
 <!-- 不刷新音乐 -->
+<!-- 进度条 -->
+<link href='https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css' rel='stylesheet' />
+<script src='https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js'></script>
+
+<script>
+$(document).on('pjax:start', function(event){
+NProgress.start();
+});
+$(document).on('pjax:end', function(event){
+NProgress.done();
+});
+</script>
+<!-- 进度条 -->
 
 <html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
 <head>

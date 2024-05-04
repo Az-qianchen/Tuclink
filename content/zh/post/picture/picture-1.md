@@ -1,5 +1,5 @@
 ---
-tags: [""] # 标签
+tags: ["Hugo"] # 标签
 author: "仟尘" # 作者
 title: "Hugo 图库 nanogallery 方案" # 标题
 date: "2024-04-28" # 日期
@@ -7,6 +7,7 @@ weight: 1 # 权重用于排序
 searchHidden: false # 是否不被搜索
 layout: "baseof" # 布局模板
 draft: false # 是否隐藏
+hidden: true # 是否隐藏（打包）
 
 description: "图库" # 页面描述、面向搜索引擎用户
 summary: "图库" # 页面描述、面向社交媒体用户
@@ -19,6 +20,7 @@ cover:
     # caption: "LOGO" # 介绍文本
     # relative: false # 是否是相对路径
 ---
+nanogallery 画廊的效果动画最完美，但是相对性能较低，且灯箱效果在移动端极为难用
 {{< galleries >}}
 {{< gallery src="https://s2.loli.net/2024/04/28/AYskmM68Eg4Cy7t.jpg" >}}
 {{< gallery src="https://s2.loli.net/2024/04/28/R1e4aFoj8r5VdOX.jpg" >}}

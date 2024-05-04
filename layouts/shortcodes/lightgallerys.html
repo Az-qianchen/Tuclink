@@ -1,6 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css" /> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js"></script> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery-bundle.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
@@ -11,20 +11,47 @@
 <head>
 
 <style>
-.post-content a {
-    box-shadow: none;
-}
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe/dist/photoswipe.css">
+    <style>
+        .post-content a {
+            box-shadow: none;
+        }
+        #my-gallery {
+            column-count: 2;
+            column-gap: 0px;
+        }
+        #my-gallery a {
+            display: block;
+            overflow: hidden; /* 防止内容溢出 */
+            border-radius: 10px;  /* 圆角 */
+            margin:  0 2px 4px 2px; /* 边距 */
+        }
+        #my-gallery img {
+            width: 100%;
+            transition: transform 0.4s ease; /* 平滑变换效果 */
+            margin: 0;
+        }
+        #my-gallery a, #my-gallery img {
+            padding: 0;
+            border: none;
+        }
+        #my-gallery a:hover img {
+            transform: scale(1.1); /* 鼠标悬停时放大图片 */
+        }
+    </style>
+</head>
 </style>
 
 </head>
 <body>
 
-<div class="gallery-container" id="animated-thumbnails-gallery">
+<div class="gallery-container" id="my-gallery">
     {{ .Inner }}
 </div>
 
 <script>
-jQuery("#animated-thumbnails-gallery")
+jQuery("#my-gallery")
 .justifiedGallery({
 captions: false,
 lastRow: "hide",
@@ -33,13 +60,12 @@ margins: 5
 })
 .on("jg.complete", function () {
 window.lightGallery(
-document.getElementById("animated-thumbnails-gallery"),
+document.getElementById("my-gallery"),
 {
 plugins: [lgZoom, lgThumbnail]
 }
 );
 });
-
 </script>
 </body>
 </html>

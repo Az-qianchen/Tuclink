@@ -28,9 +28,9 @@ img {
     max-width: calc(var(--nav-width) + var(--gap) * 10);
 }
 
-.main {
+/* .main {
     max-width: calc(var(--main-width) + var(--gap) * 5);
-}
+} */
 
 /*字体*/
 /* .post-content {

@@ -1,0 +1,45 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery-bundle.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style>
+.post-content a {
+    box-shadow: none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="gallery-container" id="animated-thumbnails-gallery">
+    {{ .Inner }}
+</div>
+
+<script>
+jQuery("#animated-thumbnails-gallery")
+.justifiedGallery({
+captions: false,
+lastRow: "hide",
+rowHeight: 200,
+margins: 5
+})
+.on("jg.complete", function () {
+window.lightGallery(
+document.getElementById("animated-thumbnails-gallery"),
+{
+plugins: [lgZoom, lgThumbnail]
+}
+);
+});
+
+</script>
+</body>
+</html>

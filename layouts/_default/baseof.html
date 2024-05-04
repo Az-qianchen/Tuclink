@@ -1,7 +1,17 @@
-<!-- light gallery -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/lightgallery.min.js" integrity="sha384-SMXsJkdv0pWRFF7S1lZPUvnBOw2WnTKw88DRxOqLysifuSomt1/jdArjX6c+d8yu" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/plugins/pager/lg-pager.min.js" integrity="sha384-KWUYFmH9+fIKCHDl+8GwbHvmGw3Q4qk0mVB1BBRznlQIZma3czxxpeVQtD71bM64" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/plugins/zoom/lg-zoom.min.js" integrity="sha384-B2e5p5SHlYQtPrvEdMpFrKtwNN5cJgFgKWpZBLdEmgjDjaPKl7bVh0masHqDdHoc" crossorigin="anonymous"></script> -->
+<!-- PWA 实现代码 -->
+<link rel="manifest" href="/effects/manifest.webmanifest">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="My PWA" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<script>
+    if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/effects/sw.js');
+    }
+</script>
+<!-- PWA 实现代码 -->
 
 {{- if lt hugo.Version "0.112.4" }}
 {{- errorf "=> hugo v0.112.4 or greater is required for hugo-PaperMod to build " }}
@@ -10,7 +20,7 @@
 <!DOCTYPE html>
 
 <!-- 不刷新音乐 -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
 
 <script>
@@ -18,7 +28,7 @@
         fragment: '#container', //被替换的容器
         cache: true, //是否使用缓存
     });
-</script>
+</script> -->
 <!-- 不刷新音乐 -->
 <!-- 进度条 -->
 <link href='https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css' rel='stylesheet' />
@@ -100,18 +110,3 @@ NProgress.done();
 <!-- 音乐播放器 -->
 {{ partial "music_player.html" . }}
 <!-- 音乐播放器 -->
-
-<!-- PWA 实现代码 -->
-<link rel="manifest" href="/effects/manifest.webmanifest">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="My PWA" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-<script>
-    if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/effects/sw.js');
-    }
-</script>
-<!-- PWA 实现代码 -->

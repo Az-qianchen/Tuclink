@@ -20,7 +20,7 @@ cover:
     # relative: false # 是否是相对路径
 ---
 {{< galleries >}}
-{{< gallery src="https://s2.loli.net/2024/04/28/AYskmM68Eg4Cy7t.jpg" title="摄影例子">}}
+{{< gallery src="https://s2.loli.net/2024/04/28/AYskmM68Eg4Cy7t.jpg" >}}
 {{< gallery src="https://s2.loli.net/2024/04/28/R1e4aFoj8r5VdOX.jpg" >}}
 {{< gallery src="https://s2.loli.net/2024/04/28/CcFDqyOZbdwJlts.jpg" >}}
 {{< gallery src="https://s2.loli.net/2024/04/28/9TrcLGFPAXltNk8.jpg" >}}

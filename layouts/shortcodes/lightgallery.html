@@ -4,44 +4,10 @@
 <!-- 另一种画廊实现 -->
 <!-- https://github.dev/dillonzq/LoveIt -->
 <!-- 主题 -->
-{{ $filter := default "images/*" (.Get 0) }}
-{{ $gallery := (.Page.Resources.Match $filter) }}
-{{ $size := default "200x120 q50" (.Get 2) }}
+<!-- https://github.com/lvbibir/lvbibir.github.io -->
+<!-- 参考主题 -->
+<!-- lightgallery.html -->
+<a href="{{ .Get "src" }}" class="gallery-item"  >
+    <img alt="{{ .Get "title" }}" src="{{ .Get "src" }}"  class="gallery-item"  />
+</a>
 
-<div id="gallery-{{ $.Get 1 }}" class="gallery-frame">
-{{ range $gallery }}
-    {{ $resized := .Fit $size }}
-    <div class="gallery-item" data-src="{{ .Permalink }}">
-        <a class="thumbnail" href="{{ .Permalink }}" data-lightbox="{{ $.Get 1 }}">
-            <img src="{{ $resized.Permalink }}" alt="{{ default "no alt text provided" .Title }}" />
-        </a>
-    </div>
-{{ end }}
-</div>
-
-<script type="text/javascript">
-    lightGallery(document.getElementById('gallery-{{ $.Get 1 }}'), {
-        mode: 'lg-fade',
-        plugins: [lgPager, lgZoom],
-        selector: '.gallery-item',
-        speed: 250,
-    });
-</script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.4.0/css/lightgallery-bundle.min.css" integrity="sha384-dBF8MEM2phKRyLDWAAiv46eog697GrUsdB8kIwEzCgyaIQkCNu08OjhnC8cSZOqh" crossorigin="anonymous" />
-
-<style>
-
-.gallery-frame {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  padding: 1rem;
-}
-
-.gallery-item {
-  margin: 1rem;
-}
-
-</style>

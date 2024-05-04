@@ -7,6 +7,7 @@ weight: 1 # 权重用于排序
 searchHidden: false # 是否不被搜索
 layout: "baseof" # 布局模板
 draft: false # 是否隐藏
+hidden: true # 是否隐藏（打包）
 
 description: "图库" # 页面描述、面向搜索引擎用户
 summary: "图库" # 页面描述、面向社交媒体用户

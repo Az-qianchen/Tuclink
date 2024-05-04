@@ -247,7 +247,6 @@
     var n_a = 0;
 
     function updateThemePreference() {
-      console.log(localStorage);
     if (localStorage.getItem('pref-theme') === 'dark') {
         a = 0;
     } else if (localStorage.getItem('pref-theme') === 'light') {
@@ -274,11 +273,13 @@
       gl.uniform1f(uniformLocations.time, performance.now() / 1000.0);
       gl.uniform1f(uniformLocations.canvas_width, canvas.width);
       gl.uniform1f(uniformLocations.canvas_height, canvas.height);
-      if (n_a == a) {
-        n_a = a;
-      } else {
-        n_a = lerpi(n_a, a, 0.2);
-      }
+      // if (n_a == a) {
+      //   n_a = a;
+      // } else {
+      //   n_a = lerpi(n_a, a, 0.1);
+      // }
+      n_a = a;
+
       gl.uniform1f(uniformLocations.theme, n_a);
 
       gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
@@ -287,7 +288,8 @@
     render();
     // 插值
     function lerpi(a, b, t) {
-      return a + ( b - a ) * t;
+      var result = a + (b - a) * t;
+      return parseFloat(result.toFixed(2));
     }
   </script>
 </body>

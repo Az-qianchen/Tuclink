@@ -1,14 +1,18 @@
+<!-- https://blog.ulric.tech/posts/hugo/papermod-adds-article-hiding-function/ -->
+<!-- 隐藏文章 -->
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- if and (gt (len $pages) 1) (in $pages . ) }}
+{{ $visiblePages := where $pages "Params.hidden" "ne" true }}<!-- 隐藏 -->
+
+{{- if and (gt (len $visiblePages) 1) (in $visiblePages .) }}
 <nav class="post-paginav">
-  {{- with $pages.Next . }}
+  {{- with $visiblePages.Next . }}
   <a class="post-prev-link" href="{{ .Permalink }}" data-pjax="false">
     <span class="title">« {{ i18n "prev_page" }}</span>
     <br>
     <span class="post-prev-title">{{- .Name -}}</span>
   </a>
   {{- end }}
-  {{- with $pages.Prev . }}
+  {{- with $visiblePages.Prev . }}
   <a class="post-next-link" href="{{ .Permalink }}" data-pjax="false">
     <span class="title">{{ i18n "next_page" }} »</span>
     <br>
@@ -17,7 +21,6 @@
   {{- end }}
 </nav>
 {{- end }}
-
 <style>
 /* 左右排布 */
 .post-paginav {

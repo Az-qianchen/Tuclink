@@ -1,5 +1,5 @@
 ---
-tags: ["web"] # 标签
+tags: ["Hugo"] # 标签
 author: "仟尘" # 作者
 title: "为网站添加 WebGL 背景" # 标题
 date: "2024-04-29" # 日期

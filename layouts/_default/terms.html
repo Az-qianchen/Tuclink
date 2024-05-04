@@ -15,8 +15,10 @@
     {{- $type := .Type }}
     {{- range $key, $value := .Data.Terms.Alphabetical }}
     {{- $name := .Name }}
-    {{- $count := .Count }}
-    {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+        {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+            {{- $pages := where .Pages "Params.hidden" "ne" true }}
+            {{- $count := len $pages }}
+
     <li>
         <!-- 添加data-pjax="false"以让pjax忽视 -->
         <a href="{{ .Permalink }}" data-pjax="false">{{ .Name }} <sup><strong><sup>{{ $count }}</sup></strong></sup> </a>

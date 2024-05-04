@@ -58,7 +58,7 @@ languages: # 翻译
           url: /post/
           weight: 20
 
-paginate: 5    # 每页显示的文章数
+paginate: 10    # 每页显示的文章数
 summaryLength: 70 # 文章概览的字数，默认70
 
 unsafe: true

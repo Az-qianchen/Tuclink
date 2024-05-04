@@ -1,15 +1,15 @@
 ---
-tags: ["图片"] # 标签
+tags: [""] # 标签
 author: "仟尘" # 作者
-title: "图片分享·2" # 标题
+title: "Hugo 图库 lightgallerys 方案" # 标题
 date: "2024-04-28" # 日期
 weight: 1 # 权重用于排序
 searchHidden: false # 是否不被搜索
 layout: "baseof" # 布局模板
-draft: true # 是否隐藏
+draft: false # 是否隐藏
 
-description: "图片分享" # 页面描述、面向搜索引擎用户
-summary: "图片分享" # 页面描述、面向社交媒体用户
+description: "图库" # 页面描述、面向搜索引擎用户
+summary: "图库" # 页面描述、面向社交媒体用户
 Keywords: "图片,摄影,分享" # 网站关键词（SEO）
 
 cover:

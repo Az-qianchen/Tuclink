@@ -1,7 +1,7 @@
 ---
 title: "技巧"
-description: "一些零碎的技巧"
-summary: "一些零碎的技巧"
+description: "一些零碎的技巧和问题的解决方案"
+summary: "一些零碎的技巧和问题的解决方案"
 hidemeta: true
 weight: 4
 cover:

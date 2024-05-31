@@ -93,9 +93,9 @@ photo swipe 是目前最理想的一种图库解决方案，MIT 协议，且性�
 </html>
 ```
 
-使用方法：(实际使用时去除\\)
+### 使用方法
 ```
-{{\< PhotoSwipes >}}
-{{\< PhotoSwipe src="https://s2.loli.net/2024/04/28/AYskmM68Eg4Cy7t.jpg" width="3000" height="4000" >}}
-{{\< /PhotoSwipes >}}
+{{</* PhotoSwipes */>}}
+{{</* PhotoSwipe src="https://s2.loli.net/2024/04/28/AYskmM68Eg4Cy7t.jpg" width="3000" height="4000" */>}}
+{{</* /PhotoSwipes */>}}
 ```

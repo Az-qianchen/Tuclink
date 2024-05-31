@@ -10,7 +10,7 @@ draft: flase # 是否隐藏
 
 description: "Godot Shader 分享" # 页面描述、面向搜索引擎用户
 summary: "Godot Shader 分享" # 页面描述、面向社交媒体用户
-Keywords: "Godot,Shader,扭曲背景)" # 网站关键词（SEO）
+Keywords: "Godot,Shader,扭曲背景" # 网站关键词（SEO）
 
 ---
 ---

@@ -20,3 +20,14 @@
     }
   });
   </script>
+
+<!-- 引入MathJax 渲染公式 -->
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script>
+$(document).on('pjax:end', function() {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+});
+</script>

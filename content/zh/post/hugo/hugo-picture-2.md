@@ -148,9 +148,9 @@ galleries.html
 ```
 参数我都进行了注释可以进行自行调整
 
-使用方法：(实际使用时去除\\)
+### 使用方法
 ```
-{{\< galleries >}}
-{{\< gallery src="https://s2.loli.net/2024/04/28/AYskmM68Eg4Cy7t.jpg" >}}
-{{\< /galleries >}}
+{{</* galleries */>}}
+{{</* gallery src="https://s2.loli.net/2024/04/28/AYskmM68Eg4Cy7t.jpg" */>}}
+{{</* /galleries */>}}
 ```

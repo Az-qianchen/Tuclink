@@ -96,13 +96,13 @@
 <!-- 侧边目录 -->
 <script>
     // 添加pjax信号修复错误
-    $(document).on('pjax:complete', function() {
-        checkTocPosition();
-        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-        activeElement = elements[0];
-        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-    });
+    // $(document).on('pjax:complete', function() {
+    //     checkTocPosition();
+    //     elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+    //     activeElement = elements[0];
+    //     const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+    //     document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    // });
     // 添加pjax信号修复错误
     
     let activeElement;

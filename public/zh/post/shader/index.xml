@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Shaders on 突触递质</title>
+    <link>https://post.tuclink.com/zh/post/shader/</link>
+    <description>Recent content in Shaders on 突触递质</description>
+    <generator>Hugo -- 0.125.4</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 12 May 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://post.tuclink.com/zh/post/shader/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Godot Shader 范围指示器</title>
+      <link>https://post.tuclink.com/zh/post/shader/shader-5/</link>
+      <pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://post.tuclink.com/zh/post/shader/shader-5/</guid>
+      <description>Godot Shader 分享</description>
+    </item>
+    <item>
+      <title>Godot Shader 面片草地效果</title>
+      <link>https://post.tuclink.com/zh/post/shader/shader-4/</link>
+      <pubDate>Sat, 11 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://post.tuclink.com/zh/post/shader/shader-4/</guid>
+      <description>Godot Shader 分享</description>
+    </item>
+    <item>
+      <title>Godot Shader 多层草地效果</title>
+      <link>https://post.tuclink.com/zh/post/shader/shader-3/</link>
+      <pubDate>Tue, 07 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://post.tuclink.com/zh/post/shader/shader-3/</guid>
+      <description>Godot Shader 分享</description>
+    </item>
+    <item>
+      <title>Godot Shader 类小丑牌背景效果</title>
+      <link>https://post.tuclink.com/zh/post/shader/shader-2/</link>
+      <pubDate>Fri, 19 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://post.tuclink.com/zh/post/shader/shader-2/</guid>
+      <description>Godot Shader 分享</description>
+    </item>
+    <item>
+      <title>Godot Shader 暗角 虚化 黑白 缩放 瓷砖动画(条纹 方形 扇形 斑点 棋盘 图片 旋转/平移动画)</title>
+      <link>https://post.tuclink.com/zh/post/shader/shader-1/</link>
+      <pubDate>Thu, 18 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://post.tuclink.com/zh/post/shader/shader-1/</guid>
+      <description>Godot Shader 分享</description>
+    </item>
+  </channel>
+</rss>

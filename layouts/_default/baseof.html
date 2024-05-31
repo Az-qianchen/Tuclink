@@ -3,6 +3,7 @@
 {{- end -}}
 
 <!DOCTYPE html>
+<meta name="referrer" content="no-referrer"><!-- 使用 B站 图床 -->
 <!-- PWA 实现代码 -->
 <link rel="manifest" href="/effects/manifest.webmanifest">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -19,7 +20,7 @@
 <!-- PWA 实现代码 -->
 
 <!-- 不刷新音乐 -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
 
 <script>
@@ -27,10 +28,14 @@
         fragment: '#container', //被替换的容器
         cache: true, //是否使用缓存
     });
-</script>
+
+$("script[data-pjax], .pjax-reload script").each(function () {
+    $(this).parent().append($(this).remove());
+});
+</script> -->
 <!-- 不刷新音乐 -->
 <!-- 进度条 -->
-<link href='https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css' rel='stylesheet' />
+<!-- <link href='https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css' rel='stylesheet' />
 <script src='https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js'></script>
 
 <script>
@@ -40,7 +45,7 @@ NProgress.start();
 $(document).on('pjax:end', function(event){
 NProgress.done();
 });
-</script>
+</script> -->
 <!-- 进度条 -->
 
 <html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
@@ -107,5 +112,5 @@ NProgress.done();
 <!-- 移动端 PWA 界面平铺适配问题 -->
 
 <!-- 音乐播放器 -->
-{{ partial "music_player.html" . }}
+<!-- {{ partial "music_player.html" . }} -->
 <!-- 音乐播放器 -->

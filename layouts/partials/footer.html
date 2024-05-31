@@ -98,26 +98,26 @@
 
 {{- if (not site.Params.disableThemeToggle) }}
 <script>
-    // document.getElementById("theme-toggle").addEventListener("click", () => {
-    //     if (document.body.className.includes("dark")) {
-    //         document.body.classList.remove('dark');
-    //         localStorage.setItem("pref-theme", 'light');
-    //     } else {
-    //         document.body.classList.add('dark');
-    //         localStorage.setItem("pref-theme", 'dark');
-    //     }
-    // })
-
-    // 使用.on绑定事件，并在绑定前使用.off移除相同的事件，防止重复绑定
-    $(document).off('click', '#theme-toggle').on('click', '#theme-toggle', function() {
-        if ($('body').hasClass('dark')) {
-            $('body').removeClass('dark');
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            $('body').addClass('dark');
+            document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
-    });
+    })
+
+    // 使用.on绑定事件，并在绑定前使用.off移除相同的事件，防止重复绑定
+    // $(document).off('click', '#theme-toggle').on('click', '#theme-toggle', function() {
+    //     if ($('body').hasClass('dark')) {
+    //         $('body').removeClass('dark');
+    //         localStorage.setItem("pref-theme", 'light');
+    //     } else {
+    //         $('body').addClass('dark');
+    //         localStorage.setItem("pref-theme", 'dark');
+    //     }
+    // });
 
 </script>
 {{- end }}

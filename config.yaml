@@ -36,7 +36,7 @@ languages: # 翻译
         - name: 标签
           url: /tags/
           weight: 15
-        - name: 文章
+        - name: 归档
           url: /post/
           weight: 20
   en:
@@ -223,8 +223,24 @@ pygmentsUseClasses: true
 
 markup: # X
   goldmark: # X
-    renderer: # X
+    rndeerer: # X
       unsafe: true # X
+  extensions:
+        hardLineBreak: true
+        hardLineBreak: true
+        passthrough:
+          delimiters:
+            block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+            inline:
+            - - \(
+              - \)
+            - - $
+              - $
+          enable: true
   highlight:
     style: dracula # X
     lineNos: false # X

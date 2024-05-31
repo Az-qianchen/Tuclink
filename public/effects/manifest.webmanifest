@@ -1,0 +1,56 @@
+{
+"lang": "zh",// 语言
+"name": "突触递质",// 完整名称
+"short_name": "突触递质",// 简称
+"description": "突触递质",// 网站描述
+"start_url": "/",// 主页地址
+"scope": "/",// 文件范围
+"background_color": "#ffffff",// 背景颜色
+"theme_color": "#ffffff",// 主题颜色（导航栏）
+"orientation": "any",// 屏幕方向 any、portrait、landscape
+"display": "fullscreen",// 显示模式 standalone：沉浸 fullscreen：全屏
+"icons": [
+    {
+    "src": "/ico/256.ico",
+    "type": "image/ico",
+    "sizes": "256x256"
+    },
+    {
+    "src": "/ico/256.ico",
+    "type": "image/ico",
+    "sizes": "256x256",
+    "purpose": "maskable"
+    },
+    {
+    "src": "/ico/512.png",
+    "type": "image/png",
+    "sizes": "512x512"
+    },
+    {
+    "src": "/ico/512.png",
+    "type": "image/png",
+    "sizes": "512x512",
+    "purpose": "maskable"
+    }
+],
+"shortcuts": [
+    {
+    "name": "Shortcut",
+    "description": "Shortcut to important page in my PWA",
+    "url": "/",
+    "icons": [
+    {
+        "src": "/ico/256.ico",
+        "type": "image/ico",
+        "sizes": "256x256"
+    },
+    {
+        "src": "/ico/256.ico",
+        "type": "image/ico",
+        "sizes": "256x256",
+        "purpose": "maskable"
+    }
+    ]
+    }
+]
+}
